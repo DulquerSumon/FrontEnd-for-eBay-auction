@@ -1,81 +1,28 @@
 [
   {
-    "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
         "internalType": "string",
-        "name": "content",
+        "name": "_name",
         "type": "string"
       },
       {
-        "indexed": false,
-        "internalType": "address",
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "createdAt",
-        "type": "uint256"
-      }
-    ],
-    "name": "MessageSent",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "author",
-        "type": "address"
-      },
-      {
-        "indexed": false,
         "internalType": "string",
-        "name": "content",
+        "name": "_description",
         "type": "string"
       },
       {
-        "indexed": false,
         "internalType": "uint256",
-        "name": "createdAt",
+        "name": "_min",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_duration",
         "type": "uint256"
       }
     ],
-    "name": "TweetSent",
-    "type": "event"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_followed",
-        "type": "address"
-      }
-    ],
-    "name": "follow",
+    "name": "createAuction",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -84,11 +31,18 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "count",
+        "name": "_auctionId",
         "type": "uint256"
       }
     ],
-    "name": "getLatestTweets",
+    "name": "createOffer",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAuction",
     "outputs": [
       {
         "components": [
@@ -98,22 +52,42 @@
             "type": "uint256"
           },
           {
-            "internalType": "address",
-            "name": "author",
+            "internalType": "address payable",
+            "name": "seller",
             "type": "address"
           },
           {
             "internalType": "string",
-            "name": "content",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
             "type": "string"
           },
           {
             "internalType": "uint256",
-            "name": "createdAt",
+            "name": "min",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "end",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "bestOfferId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "offerIds",
+            "type": "uint256[]"
           }
         ],
-        "internalType": "struct Twitter.Tweet[]",
+        "internalType": "struct Ebay.Auction[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -127,14 +101,9 @@
         "internalType": "address",
         "name": "_user",
         "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "count",
-        "type": "uint256"
       }
     ],
-    "name": "getTweetOf",
+    "name": "getUserAuctions",
     "outputs": [
       {
         "components": [
@@ -144,22 +113,42 @@
             "type": "uint256"
           },
           {
-            "internalType": "address",
-            "name": "author",
+            "internalType": "address payable",
+            "name": "seller",
             "type": "address"
           },
           {
             "internalType": "string",
-            "name": "content",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
             "type": "string"
           },
           {
             "internalType": "uint256",
-            "name": "createdAt",
+            "name": "min",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "end",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "bestOfferId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "offerIds",
+            "type": "uint256[]"
           }
         ],
-        "internalType": "struct Twitter.Tweet[]",
+        "internalType": "struct Ebay.Auction[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -170,71 +159,53 @@
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "_content",
-        "type": "string"
-      },
-      {
         "internalType": "address",
-        "name": "_to",
+        "name": "_user",
         "type": "address"
       }
     ],
-    "name": "sendMessage",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "name": "getUserOffers",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "auctionId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address payable",
+            "name": "buyer",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "price",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct Ebay.Offer[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "_content",
-        "type": "string"
-      },
-      {
-        "internalType": "address",
-        "name": "_from",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_to",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "_auctionId",
+        "type": "uint256"
       }
     ],
-    "name": "sendMessageFrom",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "_content",
-        "type": "string"
-      }
-    ],
-    "name": "tweet",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_from",
-        "type": "address"
-      },
-      {
-        "internalType": "string",
-        "name": "_content",
-        "type": "string"
-      }
-    ],
-    "name": "tweetFrom",
+    "name": "trade",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
